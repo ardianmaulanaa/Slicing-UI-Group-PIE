@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-//
-// ----------------------- CUSTOM CLIPPER -----------------------
-//
 class CurveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -23,11 +20,9 @@ class CurveClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-// ----------------------- PROFILE PAGE -----------------------
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
-  // WIDGET KHUSUS: statusItem
   Widget statusItem(String asset, String text, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
@@ -41,7 +36,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // WIDGET KHUSUS: profileMenu (DENGAN BORDER BULATAN)
   Widget profileMenu({
     required IconData icon,
     required String title,
@@ -269,8 +263,6 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-//
-// ----------------------- EDIT PROFILE PAGE -----------------------
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
 
@@ -382,7 +374,6 @@ class EditProfilePage extends StatelessWidget {
   }
 }
 
-// --- PROFILE IMAGE WITH EDIT BUTTON ---
 class ProfileImageWithEditButton extends StatelessWidget {
   final VoidCallback onEditPressed;
 
@@ -427,8 +418,6 @@ class ProfileImageWithEditButton extends StatelessWidget {
   }
 }
 
-//
-// ----------------------- ORDER STATUS PAGE -----------------------
 class OrderStatusPage extends StatefulWidget {
   final int initialTab;
 

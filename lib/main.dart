@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'personalization.dart'; // pastikan file ini ada di folder yang sama
+import 'personalization.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,11 +15,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 23, 65, 25), // kHeaderGreen
+          seedColor: const Color.fromARGB(255, 23, 65, 25),
         ),
         useMaterial3: true,
       ),
-      home: Step1Page(), // memanggil Step1Page dari personalization.dart
+      home: Step1Page(),
     );
   }
 }

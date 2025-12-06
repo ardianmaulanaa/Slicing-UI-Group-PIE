@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Warna Hijau Tua Khusus untuk Header
 const Color kHeaderGreen = Color.fromARGB(255, 23, 65, 25);
 
 class MyApp extends StatelessWidget {
@@ -12,11 +11,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Step1Page(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          // Seed Color tetap menggunakan warna hijau tua yang diminta
-          seedColor: kHeaderGreen,
-        ),
-        // Opsi: Menggunakan Material3 agar warna default elemen UI sesuai seed
+        colorScheme: ColorScheme.fromSeed(seedColor: kHeaderGreen),
+
         useMaterial3: true,
       ),
     );
@@ -48,11 +44,6 @@ class CurvedHeaderClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-// ============================================================
-// ========================= WIDGETS ==========================
-// ============================================================
-
-// Header visual (menggantikan CurvedAppBar)
 class CurvedHeader extends StatelessWidget {
   final String title;
   final String step;
@@ -75,16 +66,13 @@ class CurvedHeader extends StatelessWidget {
       clipper: CurvedHeaderClipper(),
       child: Container(
         height: headerHeight,
-        // WARNA INI YANG DIUBAH
+
         color: backgroundColor,
         child: SafeArea(
-          // Mengganti AppBar dengan Column dan Row kustom
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Bagian 1: Row Kustom (Panah, Step, Lewati)
               Padding(
-                // Padding vertikal agar sedikit turun dari atas
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 8,
@@ -92,7 +80,6 @@ class CurvedHeader extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Tombol Kembali (Panah Kiri) - Hanya tampil di Step 2 dan 3
                     if (step != '1/3')
                       Container(
                         width: 40,
@@ -112,13 +99,10 @@ class CurvedHeader extends StatelessWidget {
                         ),
                       )
                     else
-                      // Placeholder agar elemen kanan tetap di kanan penuh
                       const SizedBox(width: 40, height: 40),
 
-                    // Sisi Kanan: Penomoran Step dan Tombol Lewati
                     Row(
                       children: [
-                        // Teks Step (Misalnya "3/3") - Tidak terbungkus
                         Text(
                           step,
                           style: const TextStyle(
@@ -128,7 +112,7 @@ class CurvedHeader extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8), // Jarak pemisah
-                        // Tombol Lewati (Dibungkus Pil)
+
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 12,
@@ -149,7 +133,6 @@ class CurvedHeader extends StatelessWidget {
                 ),
               ),
 
-              // Bagian 2: Judul Utama
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
                 child: Text(
@@ -169,13 +152,11 @@ class CurvedHeader extends StatelessWidget {
   }
 }
 
-// Widget untuk Judul setiap bagian pertanyaan (Ikon daun di dalam lingkaran)
 Widget sectionTitle(String text) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 12.0),
     child: Row(
       children: [
-        // KOTAK MELINGKAR DI BELAKANG IKON DAUN
         Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
@@ -203,7 +184,6 @@ Widget sectionTitle(String text) {
   );
 }
 
-// Pembungkus untuk setiap set pertanyaan
 Widget QuestionBox({required List<Widget> children}) {
   return Container(
     margin: const EdgeInsets.only(bottom: 20),
@@ -227,7 +207,6 @@ Widget QuestionBox({required List<Widget> children}) {
   );
 }
 
-// Widget untuk kartu pilihan (radio button)
 Widget optionCard({
   required bool selected,
   required Function() onTap,
@@ -266,10 +245,6 @@ Widget optionCard({
   );
 }
 
-// ============================================================
-// ========================= STEP 1 ===========================
-// ============================================================
-
 class Step1Page extends StatefulWidget {
   @override
   State<Step1Page> createState() => _Step1PageState();
@@ -294,13 +269,11 @@ class _Step1PageState extends State<Step1Page> {
         children: [
           // 1. Header Melengkung (Bagian Hijau)
           CurvedHeader(
-            // MENGGANTI HANYA BAGIAN INI: menggunakan kHeaderGreen
             backgroundColor: kHeaderGreen,
             step: "1/3",
             title: "Yuk Jawab Biar HydropoMe Tahu Kebutuhanmu 💚",
           ),
 
-          // 2. Konten Utama (SingleChildScrollView)
           Padding(
             padding: EdgeInsets.only(top: contentOffsetTop),
             child: SingleChildScrollView(
@@ -372,7 +345,6 @@ class _Step1PageState extends State<Step1Page> {
         ],
       ),
 
-      // Tombol Selanjutnya (fixed di bawah)
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(20),
         color: Colors.white,
@@ -381,12 +353,7 @@ class _Step1PageState extends State<Step1Page> {
           height: 52,
           child: FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color.fromARGB(
-                255,
-                42,
-                120,
-                40,
-              ), // Kembali ke Colors.green
+              backgroundColor: const Color.fromARGB(255, 42, 120, 40),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -405,10 +372,6 @@ class _Step1PageState extends State<Step1Page> {
   }
 }
 
-// ============================================================
-// ========================= STEP 2 ===========================
-// ============================================================
-
 class Step2Page extends StatefulWidget {
   @override
   State<Step2Page> createState() => _Step2PageState();
@@ -419,7 +382,6 @@ class _Step2PageState extends State<Step2Page> {
   String? waktu;
   String? lokasi;
 
-  // Menggunakan checkbox yang bisa dipilih lebih dari satu
   Widget checkboxCard({
     required bool selected,
     required Function() onTap,
@@ -458,7 +420,6 @@ class _Step2PageState extends State<Step2Page> {
     );
   }
 
-  // Menggunakan radio button yang hanya bisa dipilih satu
   Widget radioCard({
     required bool selected,
     required Function() onTap,
@@ -510,9 +471,7 @@ class _Step2PageState extends State<Step2Page> {
 
       body: Stack(
         children: [
-          // 1. Header Melengkung (Bagian Hijau)
           CurvedHeader(
-            // MENGGANTI HANYA BAGIAN INI: menggunakan kHeaderGreen
             backgroundColor: kHeaderGreen,
             step: "2/3",
             title: "Yuk Jawab Biar HydropoMe Tahu Kebutuhanmu 💚",
@@ -632,7 +591,6 @@ class _Step2PageState extends State<Step2Page> {
         ],
       ),
 
-      // Tombol Selanjutnya (fixed di bawah)
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(20),
         color: Colors.white,
@@ -641,12 +599,7 @@ class _Step2PageState extends State<Step2Page> {
           height: 52,
           child: FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color.fromARGB(
-                255,
-                42,
-                120,
-                40,
-              ), // Kembali ke Colors.green
+              backgroundColor: const Color.fromARGB(255, 42, 120, 40),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -665,10 +618,6 @@ class _Step2PageState extends State<Step2Page> {
   }
 }
 
-// ============================================================
-// ========================= STEP 3 ===========================
-// ============================================================
-
 class Step3Page extends StatefulWidget {
   @override
   State<Step3Page> createState() => _Step3PageState();
@@ -677,7 +626,6 @@ class Step3Page extends StatefulWidget {
 class _Step3PageState extends State<Step3Page> {
   String? area;
 
-  // Modifikasi: optionArea menerima widget kustom
   Widget optionArea({
     required String value,
     required String label,
@@ -712,7 +660,6 @@ class _Step3PageState extends State<Step3Page> {
             ),
             const SizedBox(width: 12),
 
-            // Ilustrasi/Ikon untuk Area Tanam
             iconOrImage,
 
             const SizedBox(width: 12),
@@ -738,7 +685,6 @@ class _Step3PageState extends State<Step3Page> {
         children: [
           // 1. Header Melengkung (Bagian Hijau)
           CurvedHeader(
-            // MENGGANTI HANYA BAGIAN INI: menggunakan kHeaderGreen
             backgroundColor: kHeaderGreen,
             step: "3/3",
             title: "Yuk Jawab Biar HydropoMe Tahu Kebutuhanmu 💚",
@@ -766,18 +712,13 @@ class _Step3PageState extends State<Step3Page> {
                         value: "<1",
                         label: "< 1 m²",
                         iconOrImage: Image.asset(
-                          'assets/ukuran.png', // FILE ASET TUNGGAL
+                          'assets/ukuran.png',
                           width: 30,
                           height: 30,
                           errorBuilder: (_, __, ___) => const Icon(
                             Icons.crop_square,
                             size: 30,
-                            color: const Color.fromARGB(
-                              255,
-                              42,
-                              120,
-                              40,
-                            ), // Kembali ke Colors.green
+                            color: const Color.fromARGB(255, 42, 120, 40), //
                           ),
                         ),
                       ),
@@ -787,18 +728,13 @@ class _Step3PageState extends State<Step3Page> {
                         value: "1-3",
                         label: "1–3 m²",
                         iconOrImage: Image.asset(
-                          'assets/ukuran.png', // FILE ASET TUNGGAL
+                          'assets/ukuran.png',
                           width: 45,
                           height: 45,
                           errorBuilder: (_, __, ___) => const Icon(
                             Icons.crop_landscape,
                             size: 45,
-                            color: const Color.fromARGB(
-                              255,
-                              42,
-                              120,
-                              40,
-                            ), // Kembali ke Colors.green
+                            color: const Color.fromARGB(255, 42, 120, 40),
                           ),
                         ),
                       ),
@@ -808,18 +744,13 @@ class _Step3PageState extends State<Step3Page> {
                         value: ">3",
                         label: "> 3 m²",
                         iconOrImage: Image.asset(
-                          'assets/ukuran.png', // FILE ASET TUNGGAL
+                          'assets/ukuran.png',
                           width: 60,
                           height: 60,
                           errorBuilder: (_, __, ___) => const Icon(
                             Icons.crop_original,
                             size: 60,
-                            color: const Color.fromARGB(
-                              255,
-                              42,
-                              120,
-                              40,
-                            ), // Kembali ke Colors.green
+                            color: const Color.fromARGB(255, 42, 120, 40),
                           ),
                         ),
                       ),
@@ -841,12 +772,7 @@ class _Step3PageState extends State<Step3Page> {
           height: 52,
           child: FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: const Color.fromARGB(
-                255,
-                42,
-                120,
-                40,
-              ), // Kembali ke Colors.green
+              backgroundColor: const Color.fromARGB(255, 42, 120, 40),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

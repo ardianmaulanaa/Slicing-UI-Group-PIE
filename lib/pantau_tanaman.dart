@@ -75,18 +75,15 @@ class CustomCurvedHeader extends StatelessWidget {
         height: 200, // Ketinggian latar belakang hijau
         color: darkGreen,
         width: double.infinity,
-        // Gunakan padding untuk menyesuaikan posisi teks/ikon (termasuk safe area)
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 40, 16, 50),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Kolom untuk Teks Judul
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    // Status bar Teks Waktu (tiruan)
                     SizedBox(height: 10),
                     // Teks Judul
                     Text(
@@ -108,11 +105,9 @@ class CustomCurvedHeader extends StatelessWidget {
                   const Spacer(),
                   // Gambar Daun
                   Container(
-                    width: 100, // Sesuaikan ukuran
-                    height: 100, // Sesuaikan ukuran
-                    child: Image.asset(
-                      'assets/daun.png', // Ganti dengan path aset Anda
-                    ),
+                    width: 100,
+                    height: 100,
+                    child: Image.asset('assets/daun.png'),
                   ),
                 ],
               ),
@@ -145,8 +140,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: const [
-                  // Search Bar diposisikan di sini
-                  SearchBarWidget(), // Sudah ada margin horizontal 16.0 di dalam widget ini
+                  SearchBarWidget(),
 
                   SizedBox(height: 24),
 
@@ -164,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: PlantListContainer(), // Menggunakan kode lama Anda
+                    child: PlantListContainer(),
                   ),
 
                   SizedBox(height: 24),
@@ -183,7 +177,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: PlantListContainer(), // Menggunakan kode lama Anda
+                    child: PlantListContainer(),
                   ),
                   SizedBox(height: 30),
                 ],
@@ -192,12 +186,11 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const StatusBar(), // Menggunakan kode lama Anda
+      bottomNavigationBar: const StatusBar(),
     );
   }
 }
 
-/// ------------------ LIST & ITEM ------------------
 class PlantListContainer extends StatelessWidget {
   const PlantListContainer({super.key});
 
@@ -254,14 +247,12 @@ class PlantListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // menentukan warna berdasarkan level
     final Color levelColor = (level.toLowerCase() == "sulit")
         ? Colors.red
         : Colors.green;
 
     return Row(
       children: [
-        // thumbnail
         Container(
           height: 72,
           width: 72,
@@ -299,7 +290,6 @@ class PlantListItem extends StatelessWidget {
               ),
               const SizedBox(height: 4),
 
-              // HARI - icon daun, warna hijau
               Row(
                 children: [
                   const Icon(Icons.eco, color: Colors.green, size: 14),
@@ -311,7 +301,6 @@ class PlantListItem extends StatelessWidget {
           ),
         ),
 
-        // BUTTON PANTAU warna teks putih
         ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -342,7 +331,6 @@ class PlantListItem extends StatelessWidget {
   }
 }
 
-/// ------------------ STATUS BAR ------------------
 class StatusBar extends StatelessWidget {
   const StatusBar({super.key});
 
@@ -364,7 +352,6 @@ class StatusBar extends StatelessWidget {
   }
 }
 
-/// ------------------ PANTAU TANAMAN (Halaman 2) ------------------
 class PantauTanamanScreen extends StatefulWidget {
   final String plantName;
   final String imageAsset;
@@ -422,7 +409,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
               ),
             ),
 
-            // Card info (seolah floating) - Sudah diubah
             Container(
               transform: Matrix4.translationValues(0.0, -40.0, 0.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -465,7 +451,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // BARU: Row untuk Progress Bar dan Daun
                   Card(
                     elevation: 4,
                     color: Colors.white,
@@ -497,7 +482,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
                                 ),
                                 const SizedBox(height: 8),
 
-                                // BAR PROGRESS
                                 Stack(
                                   children: [
                                     LinearProgressIndicator(
@@ -553,9 +537,7 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
                             height: 80,
                             alignment: Alignment.topRight,
                             child: Image(
-                              image: AssetImage(
-                                "assets/daunputih.png",
-                              ), // Harus menggunakan AssetImage
+                              image: AssetImage("assets/daunputih.png"),
                             ),
                           ),
                         ],
@@ -565,7 +547,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
 
                   const SizedBox(height: 0),
 
-                  // Bagian Hari-hari (sebelumnya ada di sini)
                   SizedBox(
                     height: 88,
                     child: ListView.separated(
@@ -622,7 +603,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
               ),
             ),
 
-            // Tugas hari dan tips (kotak putih)
             Container(
               margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               padding: const EdgeInsets.all(14),
@@ -676,7 +656,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
               ),
             ),
 
-            // Banner marketplace contoh
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30.0),
               padding: const EdgeInsets.all(12),
@@ -736,15 +715,14 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
                           ],
                         ),
                       ),
+
                       // Placeholder untuk gambar
-                      // Ganti dengan widget gambar yang sebenarnya jika perlu disesuaikan dengan tinggi Container
                       SizedBox(
-                        width: 120, // Sesuaikan lebar gambar
-                        height: 120, // Sesuaikan tinggi gambar
+                        width: 120,
+                        height: 120,
                         child: Image.asset(
                           "assets/banner.png",
                           fit: BoxFit.cover,
-                          // Ganti dengan widget yang menampilkan gambar sistem hidroponik
                         ),
                       ),
                     ],
@@ -813,7 +791,6 @@ class _PantauTanamanScreenState extends State<PantauTanamanScreen> {
   }
 }
 
-/// ------------------ POPUP "HALAMAN 3" ------------------
 class CompletedPopup extends StatelessWidget {
   const CompletedPopup({super.key});
 
@@ -851,7 +828,6 @@ class CompletedPopup extends StatelessWidget {
               const SizedBox(height: 14),
               ElevatedButton(
                 onPressed: () {
-                  // contoh behavior: tutup dialog -> lanjut ke hari berikutnya (di implementasi real bisa increment)
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Lanjut ke hari berikutnya')),
